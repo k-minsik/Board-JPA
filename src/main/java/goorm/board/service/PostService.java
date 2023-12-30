@@ -30,8 +30,8 @@ public class PostService {
         // 본문 내용 불포함
         // 페이징 기능
         // 최신 글이 운선순위가 높음
-        Pageable pageable = PageRequest.of(0, 10, Sort.by("postId").descending());
-        Page<Post> postList = postRepository.findAllByOrderByPostIdDesc(pageable);
+        PageRequest pageRequest = PageRequest.of(0, 10, Sort.by("postId").descending());
+        Page<Post> postList = postRepository.findAllByOrderByPostIdDesc(pageRequest);
 
         List<PostDto> posts = postList.stream()
                 .map(post -> new PostDto(post.getPostId(), post.getPostTitle()))
